@@ -10,6 +10,8 @@ const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')))
 // digerIslemler routing
 const Musteriler = Loadable(lazy(() => import('views/digerIslemler/MusteriListesi')));
 const MusteriEkle = Loadable(lazy(() => import('views/digerIslemler/MusteriEkle')));
+const Firmalar = Loadable(lazy(() => import('views/digerIslemler/FirmaListesi')));
+const FirmaEkle = Loadable(lazy(() => import('views/digerIslemler/FirmaEkle')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -108,6 +110,18 @@ const MainRoutes = {
                 {
                     path: 'musteri-duzenle/:id',
                     element: <MusteriEkle />
+                },
+                {
+                    path: 'firmalar',
+                    element: <Firmalar />
+                },
+                {
+                    path: 'firma-ekle',
+                    element: <FirmaEkle />
+                },
+                {
+                    path: 'firma-duzenle/:id',
+                    element: <FirmaEkle />
                 }
             ]
         }

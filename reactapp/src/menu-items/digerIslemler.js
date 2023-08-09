@@ -1,8 +1,8 @@
 // assets
-import { IconUsers } from '@tabler/icons';
+import { IconUsers, IconBuildingEstate } from '@tabler/icons';
 
 // constant
-const icons = { IconUsers };
+const icons = { IconUsers, IconBuildingEstate };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -29,6 +29,27 @@ const digerIslemler = {
                     title: 'Müşteri Ekle',
                     type: 'item',
                     url: '/digerIslemler/musteri-ekle'
+                }
+            ]
+        },
+        {
+            id: 'firmalar',
+            title: 'Firmalar',
+            type: 'collapse',
+            icon: icons.IconBuildingEstate,
+
+            children: [
+                {
+                    id: 'firmalar',
+                    title: 'Firma Listesi',
+                    type: 'item',
+                    url: '/digerIslemler/firmalar'
+                },
+                {
+                    id: 'firma-ekle',
+                    title: 'Firma Ekle',
+                    type: 'item',
+                    url: '/digerIslemler/firma-ekle'
                 }
             ]
         }
