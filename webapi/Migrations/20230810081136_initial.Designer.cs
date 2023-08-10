@@ -11,14 +11,14 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20230711085843_init")]
-    partial class init
+    [Migration("20230810081136_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
 
             modelBuilder.Entity("webapi.Entity.Customer", b =>
                 {
@@ -60,6 +60,56 @@ namespace webapi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("webapi.Entity.Firma", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Creator")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirmaAdi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirmaAdresi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirmaSektoru")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TelefonNumarasi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Updater")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("WebAdresi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Firma");
                 });
 
             modelBuilder.Entity("webapi.Entity.Log.ExceptionLog", b =>

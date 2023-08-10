@@ -67,7 +67,7 @@ namespace webapi.Controllers
                 return new ApiResult { Result = false, Message = "Belirtilen müşteri bulunamadı." };
             }
 
-            _unitOfWork.Repository<Musteri>().SoftDelete(data.Id);
+            _unitOfWork.Repository<Musteri>().Delete(data.Id);
             _unitOfWork.SaveChanges();
             return new ApiResult { Result = true };
         }

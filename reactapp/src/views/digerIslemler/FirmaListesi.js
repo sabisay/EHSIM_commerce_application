@@ -52,11 +52,11 @@ const Example = () => {
     const columns = useMemo(
         () => [
             {
-                accessorKey: 'FirmaAdi',
+                accessorKey: 'firmaAdi',
                 header: 'Firma Adı'
             },
             {
-                accessorKey: 'firmasektoru',
+                accessorKey: 'firmaSektoru',
                 header: 'Sektör'
             },
             {
