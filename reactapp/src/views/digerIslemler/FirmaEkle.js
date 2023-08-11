@@ -151,7 +151,7 @@ function FirmaEkle() {
                             await sleep(500 - millis);
                         }
                         console.log(response.data);
-                        seFirmaAdi(response.data.data.firmaAdi);
+                        setFirmaAdi(response.data.data.firmaAdi);
                         setFirmaSektoru(response.data.data.firmaSektoru);
                         setFirmaAdresi(response.data.data.firmaAdresi);
                         setWebAdresi(response.data.data.webAdresi);
