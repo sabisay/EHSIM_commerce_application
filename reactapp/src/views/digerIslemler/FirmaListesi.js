@@ -151,6 +151,7 @@ const Example = () => {
                         <IconButton
                             color="error"
                             onClick={() => {
+                                console.log(row.original.id);
                                 deleteById(row.original.id);
                             }}
                         >

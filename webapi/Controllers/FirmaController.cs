@@ -6,7 +6,7 @@ using webapi.Helper.Base;
 using webapi.ViewModel.General.Grid;
 using webapi.ViewModel;
 using webapi.ViewModel.Firma;
-
+using SQLitePCL;
 
 namespace webapi.Controllers
 {
@@ -18,7 +18,7 @@ namespace webapi.Controllers
         public FirmaController(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
         }
-
+        
 
         [HttpPost("CreateOrUpdate")]
         public ApiResult CreateOrUpdate([FromBody] FirmaCreateVM dataVM) 
