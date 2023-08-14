@@ -143,7 +143,7 @@ const Example = () => {
                         <IconButton
                             color="secondary"
                             onClick={() => {
-                                navigate(`/digerIslemler/firma-duzenle/${row.original.id}`);
+                                navigate(`/digerIslemler/firma-duzenle/${row.original.firmaId}`);
                             }}
                         >
                             <EditIcon />
@@ -151,8 +151,8 @@ const Example = () => {
                         <IconButton
                             color="error"
                             onClick={() => {
-                                console.log(row.original.id);
-                                deleteById(row.original.id);
+                                console.log(row.original);
+                                deleteById(row.original.firmaId);
                             }}
                         >
                             <DeleteIcon />
