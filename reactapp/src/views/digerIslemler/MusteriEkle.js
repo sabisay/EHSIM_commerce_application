@@ -30,12 +30,12 @@ function MusteriEkle() {
 
     useEffect(() => {
         console.log(id);
+        firmaSelectPromise();
         if (typeof id !== 'undefined') {
             setIsUpdate(id);
             setIsFetching(true);
             musteriGetirPromise();
         } else {
-            firmaSelectPromise();
             setEmail('');
             setPhone('');
             setMusteriAdi('');
