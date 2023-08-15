@@ -82,7 +82,7 @@ function FirmaEkle() {
             const start = Date.now();
             setValidationErrors({});
             let data = JSON.stringify({
-                id: typeof id !== 'undefined' ? id : 0,
+                firmaId: typeof id !== 'undefined' ? id : 0,
                 firmaAdi: firmaAdi,
                 firmaSektoru: firmaSektoru,
                 firmaAdresi: firmaAdresi,

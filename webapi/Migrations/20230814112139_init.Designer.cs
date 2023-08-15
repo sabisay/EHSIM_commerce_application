@@ -11,8 +11,8 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20230810081136_initial")]
-    partial class initial
+    [Migration("20230814112139_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,6 +163,10 @@ namespace webapi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Firma")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

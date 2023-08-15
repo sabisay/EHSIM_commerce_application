@@ -1,4 +1,4 @@
-import { Button, Container, FormControl, Grid, LinearProgress, TextField } from '@mui/material';
+import { Button, Container, FormControl, Grid, LinearProgress, TextField, InputLabel, Select } from '@mui/material';
 import React from 'react';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 import { useState } from 'react';
@@ -7,6 +7,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -20,10 +22,11 @@ function MusteriEkle() {
     const [phoneError, setPhoneError] = React.useState(false);
     const [musteriAdi, setMusteriAdi] = useState('');
     const [musteriSoyadi, setMusteriSoyadi] = useState('');
-    const [firmaAdi, setFirmaAdi] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState(false);
     const [validationErrors, setValidationErrors] = React.useState({});
+    const [firma, setFirma] = React.useState('');
+    const [firmaSelect, setFirmaSelect] = useState([]);
 
     useEffect(() => {
         console.log(id);
@@ -32,14 +35,18 @@ function MusteriEkle() {
             setIsFetching(true);
             musteriGetirPromise();
         } else {
+            firmaSelectPromise();
             setEmail('');
             setPhone('');
             setMusteriAdi('');
             setMusteriSoyadi('');
-            setFirmaAdi('');
             setIsFetching(false);
         }
     }, [id]);
+
+    const handleChange = (e) => {
+        setFirma(e.target.value);
+    };
 
     const handleNumber = (value, info) => {
         setPhone(info.numberValue);
@@ -83,6 +90,7 @@ function MusteriEkle() {
                 id: typeof id !== 'undefined' ? id : 0,
                 adi: musteriAdi,
                 soyadi: musteriSoyadi,
+                firma: firma,
                 telefonNumarasi: phone,
                 email: email
             });
@@ -148,11 +156,57 @@ function MusteriEkle() {
                         }
                         console.log(response.data);
                         setMusteriAdi(response.data.data.adi);
+                        setFirma(response.data.data.firma);
                         setMusteriSoyadi(response.data.data.soyadi);
                         setEmail(response.data.data.email);
                         setPhone(response.data.data.telefonNumarasi);
                         setFetchingError(false);
                         resolve(response.data); // Başarılı sonuç d1urumunda Promise'ı çöz
+                    } else {
+                        setFetchingError(true);
+                        reject(new Error('İşlem başarısız')); // Başarısız sonuç durumunda Promise'ı reddet
+                    }
+                })
+                .catch((error) => {
+                    setFetchingError(true);
+                    console.log(error);
+                    reject(error); // Hata durumunda Promise'ı reddet
+                })
+                .finally(() => {
+                    setIsFetching(false);
+                });
+        });
+    };
+
+    const firmaSelectPromise = () => {
+        return new Promise(async (resolve, reject) => {
+            const start = Date.now();
+            setValidationErrors({});
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:5273/api/Firma/getFirmaSelect',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'text/plain'
+                },
+                params: {
+                    id: id
+                }
+            };
+
+            axios
+                .request(config)
+                .then(async (response) => {
+                    console.log(JSON.stringify(response.data.data));
+                    setFirmaSelect(response.data.data);
+                    setFetchingError(false);
+                    resolve(response.data);
+                    if (response.data.result) {
+                        const millis = Date.now() - start;
+                        if (millis < 500) {
+                            await sleep(500 - millis);
+                        }
                     } else {
                         setFetchingError(true);
                         reject(new Error('İşlem başarısız')); // Başarısız sonuç durumunda Promise'ı reddet
@@ -177,6 +231,14 @@ function MusteriEkle() {
                         {isFetching && <LinearProgress className="mt-3" color="secondary" />}
                         {(isUpdate === 0 || !isFetching) && (
                             <>
+                                <Select id="firma" label="Firma" value={firma} onChange={handleChange}>
+                                    {firmaSelect.map((firmaItem) => (
+                                        <MenuItem key={firmaItem.firmaId} value={firmaItem.firmaAdi}>
+                                            {firmaItem.firmaAdi}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+
                                 <TextField
                                     value={musteriAdi}
                                     margin="normal"
@@ -197,14 +259,8 @@ function MusteriEkle() {
                                     error={!!validationErrors.Soyadi}
                                     helperText={validationErrors.Soyadi}
                                 />
-                                <TextField
-                                    margin="normal"
-                                    id="company"
-                                    value={firmaAdi}
-                                    label="Firma Adı"
-                                    variant="outlined"
-                                    onChange={(e) => setFirmaAdi(e.target.value)}
-                                />
+                                <InputLabel id="demo-simple-select-label">Firma</InputLabel>
+
                                 <TextField
                                     error={emailError || !!validationErrors.Email}
                                     helperText={emailError ? 'Email adresini kontrol edin' : validationErrors.Email} // emailError true ise kendi mesajını göster, aksi halde validationErrors'tan gelen mesajı göster

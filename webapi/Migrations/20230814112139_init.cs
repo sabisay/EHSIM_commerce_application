@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace webapi.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -81,6 +81,7 @@ namespace webapi.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Adi = table.Column<string>(type: "TEXT", nullable: false),
                     Soyadi = table.Column<string>(type: "TEXT", nullable: false),
+                    Firma = table.Column<string>(type: "TEXT", nullable: false),
                     TelefonNumarasi = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     Creator = table.Column<int>(type: "INTEGER", nullable: true),

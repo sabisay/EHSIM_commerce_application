@@ -116,6 +116,21 @@ namespace webapi.Controllers
             };
             return new ApiResult<FirmaGridVM> { Data = firmaVM, Result = true };
         }
+
+
+        [HttpPost("getFirmaSelect")]
+        public ApiResult<List<FirmaGridVM>> GetFirmaSelect()
+        {
+            var firma = _unitOfWork.Repository<Firma>()
+                .Select(x => new FirmaGridVM
+                {
+                FirmaId = x.Id,
+                FirmaAdi = x.FirmaAdi
+
+            }). ToList();
+           
+            return new ApiResult<List<FirmaGridVM>> { Data = firma, Result = true };
+        }
     }
 }
 

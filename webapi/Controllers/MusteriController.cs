@@ -30,6 +30,7 @@ namespace webapi.Controllers
                 data = _unitOfWork.Repository<Musteri>().GetById(dataVM.Id);
                 data.Adi = dataVM.Adi;
                 data.Soyadi = dataVM.Soyadi;
+                data.Firma = dataVM.Firma;
                 data.Email = dataVM.Email;
                 data.TelefonNumarasi = dataVM.TelefonNumarasi;
             }
@@ -39,6 +40,7 @@ namespace webapi.Controllers
                 {
                     Adi = dataVM.Adi,
                     Soyadi = dataVM.Soyadi,
+                    Firma= dataVM.Firma,
                     Email = dataVM.Email,
                     TelefonNumarasi = dataVM.TelefonNumarasi,
                 };
@@ -81,6 +83,7 @@ namespace webapi.Controllers
                 Id = x.Id,
                 Adi = x.Adi,
                 Soyadi = x.Soyadi,
+                Firma= x.Firma,
                 Email = x.Email,
                 TelefonNumarasi = x.TelefonNumarasi,
             });
@@ -97,6 +100,7 @@ namespace webapi.Controllers
             {
                 Id = musteri.Id,
                 Adi = musteri.Adi,
+                Firma = musteri.Firma,
                 Soyadi= musteri.Soyadi,
                 Email = musteri.Email,
                 TelefonNumarasi = musteri.TelefonNumarasi

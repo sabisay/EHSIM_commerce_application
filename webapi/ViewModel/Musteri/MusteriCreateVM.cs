@@ -6,6 +6,8 @@ namespace webapi.ViewModel.Musteri
     {
         public int Id { get; set; }
         [Required]
+        public string Firma { get; set; }
+        [Required]
         public string Adi { get; set; }
         [Required]
         public string Soyadi { get; set; }
