@@ -306,7 +306,7 @@ function MusteriEkle() {
                                         variant="outlined"
                                         id="firma"
                                         onChange={handleChange}
-                                        placeholder="Firma Seçiniz."
+                                        placeholder="Firma"
                                         options={firmaSelect.map((firmaItem) => ({
                                             value: firmaItem.firmaAdi,
                                             label: firmaItem.firmaAdi
