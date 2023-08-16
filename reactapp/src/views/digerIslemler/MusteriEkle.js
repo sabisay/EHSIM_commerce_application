@@ -1,4 +1,4 @@
-import { Button, Container, FormControl, Grid, LinearProgress, TextField, InputLabel, Select } from '@mui/material';
+import { Button, Container, FormControl, Grid, LinearProgress, TextField, InputLabel } from '@mui/material';
 import React from 'react';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 import { useState } from 'react';
@@ -7,8 +7,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import { SelectChangeEvent } from '@mui/material/Select';
+import Select from 'react-select';
+import { padding } from '@mui/system';
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -44,8 +44,8 @@ function MusteriEkle() {
         }
     }, [id]);
 
-    const handleChange = (e) => {
-        setFirma(e.target.value);
+    const handleChange = (selectedOption) => {
+        setFirma(selectedOption.value);
     };
 
     const handleNumber = (value, info) => {
@@ -231,14 +231,6 @@ function MusteriEkle() {
                         {isFetching && <LinearProgress className="mt-3" color="secondary" />}
                         {(isUpdate === 0 || !isFetching) && (
                             <>
-                                <Select id="firma" label="Firma" value={firma} onChange={handleChange}>
-                                    {firmaSelect.map((firmaItem) => (
-                                        <MenuItem key={firmaItem.firmaId} value={firmaItem.firmaAdi}>
-                                            {firmaItem.firmaAdi}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-
                                 <TextField
                                     value={musteriAdi}
                                     margin="normal"
@@ -246,8 +238,8 @@ function MusteriEkle() {
                                     label="Müşteri Adı"
                                     variant="outlined"
                                     onChange={(e) => setMusteriAdi(e.target.value)}
-                                    error={!!validationErrors.Adi} // Hatanın varlığına göre error özelliğini ayarla
-                                    helperText={validationErrors.Adi} // Hata mesajını helperText olarak göster
+                                    error={!!validationErrors.Adi}
+                                    helperText={validationErrors.Adi}
                                 />
                                 <TextField
                                     margin="normal"
@@ -259,11 +251,9 @@ function MusteriEkle() {
                                     error={!!validationErrors.Soyadi}
                                     helperText={validationErrors.Soyadi}
                                 />
-                                <InputLabel id="demo-simple-select-label">Firma</InputLabel>
-
                                 <TextField
                                     error={emailError || !!validationErrors.Email}
-                                    helperText={emailError ? 'Email adresini kontrol edin' : validationErrors.Email} // emailError true ise kendi mesajını göster, aksi halde validationErrors'tan gelen mesajı göster
+                                    helperText={emailError ? 'Email adresini kontrol edin' : validationErrors.Email}
                                     type="email"
                                     margin="normal"
                                     id="e-mail"
@@ -286,6 +276,20 @@ function MusteriEkle() {
                                     focusOnSelectCountry
                                     forceCallingCode
                                 />
+                                <div style={{ marginTop: '20px' }} />
+                                <Select
+                                    margin="normal"
+                                    variant="outlined"
+                                    id="firma"
+                                    onChange={handleChange}
+                                    placeholder="Firma"
+                                    options={firmaSelect.map((firmaItem) => ({
+                                        value: firmaItem.firmaAdi,
+                                        label: firmaItem.firmaAdi
+                                    }))}
+                                    sx={{ width: '150px' }}
+                                />
+                                <div style={{ marginTop: '20px' }} /> {}
                                 <Button onClick={musteriEkle} className="mb-2" margin="normal" variant="contained">
                                     Kaydet
                                 </Button>
