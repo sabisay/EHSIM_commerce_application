@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Select from 'react-select';
-import { padding } from '@mui/system';
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -27,6 +26,30 @@ function MusteriEkle() {
     const [validationErrors, setValidationErrors] = React.useState({});
     const [firma, setFirma] = React.useState('');
     const [firmaSelect, setFirmaSelect] = useState([]);
+
+    const selectStyles = {
+        control: (base, state) => ({
+            ...base,
+            innerHeight: 200,
+            boxSizing: 'border-box',
+            padding: '6px 10px',
+            textAlign: 'Left',
+            position: 'relative',
+            margin: 'normal',
+            borderRadius: '12px',
+            backgroundColor: '#F8FAFC',
+            color: '364152',
+            fontFamily: 'Roboto, sans-serif',
+            bottom: '0'
+        }),
+        option: (provided) => ({
+            ...provided,
+            padding: '10px 14px',
+            boxSizing: 'border-box',
+            position: 'relative',
+            zIndex: 9999
+        })
+    };
 
     useEffect(() => {
         console.log(id);
@@ -276,19 +299,20 @@ function MusteriEkle() {
                                     focusOnSelectCountry
                                     forceCallingCode
                                 />
-                                <div style={{ marginTop: '20px' }} />
-                                <Select
-                                    margin="normal"
-                                    variant="outlined"
-                                    id="firma"
-                                    onChange={handleChange}
-                                    placeholder="Firma"
-                                    options={firmaSelect.map((firmaItem) => ({
-                                        value: firmaItem.firmaAdi,
-                                        label: firmaItem.firmaAdi
-                                    }))}
-                                    sx={{ width: '150px' }}
-                                />
+                                <div style={{ marginTop: '20px' }}>
+                                    <Select
+                                        className="custom-select"
+                                        styles={selectStyles}
+                                        variant="outlined"
+                                        id="firma"
+                                        onChange={handleChange}
+                                        placeholder="Firma Seçiniz."
+                                        options={firmaSelect.map((firmaItem) => ({
+                                            value: firmaItem.firmaAdi,
+                                            label: firmaItem.firmaAdi
+                                        }))}
+                                    />
+                                </div>
                                 <div style={{ marginTop: '20px' }} /> {}
                                 <Button onClick={musteriEkle} className="mb-2" margin="normal" variant="contained">
                                     Kaydet
