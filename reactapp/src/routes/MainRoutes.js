@@ -12,6 +12,8 @@ const Musteriler = Loadable(lazy(() => import('views/digerIslemler/MusteriListes
 const MusteriEkle = Loadable(lazy(() => import('views/digerIslemler/MusteriEkle')));
 const Firmalar = Loadable(lazy(() => import('views/digerIslemler/FirmaListesi')));
 const FirmaEkle = Loadable(lazy(() => import('views/digerIslemler/FirmaEkle')));
+const Kategoriler = Loadable(lazy(() => import('views/digerIslemler/KategoriListesi')));
+const KategoriEkle = Loadable(lazy(() => import('views/digerIslemler/KategoriEkle')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -122,6 +124,18 @@ const MainRoutes = {
                 {
                     path: 'firma-duzenle/:id',
                     element: <FirmaEkle />
+                },
+                {
+                    path: 'kategoriler',
+                    element: <Kategoriler />
+                },
+                {
+                    path: 'kategori-ekle',
+                    element: <KategoriEkle />
+                },
+                {
+                    path: 'kategori-duzenle/:id',
+                    element: <KategoriEkle />
                 }
             ]
         }

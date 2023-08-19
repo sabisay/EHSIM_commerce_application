@@ -10,6 +10,7 @@ namespace webapi.Data
         public DbSet<ExceptionLog> ExceptionLog { get; set; }
         public DbSet<Musteri> Musteri { get; set; }
         public DbSet<Firma> Firma { get; set; }
+        public DbSet<Kategori> Kategori { get; set; }
 
         public string DbPath { get; }
 

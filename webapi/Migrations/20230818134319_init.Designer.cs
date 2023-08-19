@@ -11,7 +11,7 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20230815101332_init")]
+    [Migration("20230818134319_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -110,6 +110,43 @@ namespace webapi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Firma");
+                });
+
+            modelBuilder.Entity("webapi.Entity.Kategori", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Creator")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Detay")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("KategoriAdi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("KategoriAktif")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Updater")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kategori");
                 });
 
             modelBuilder.Entity("webapi.Entity.Log.ExceptionLog", b =>

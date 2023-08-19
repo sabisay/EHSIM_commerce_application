@@ -74,6 +74,26 @@ namespace webapi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Kategori",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    KategoriAdi = table.Column<string>(type: "TEXT", nullable: false),
+                    KategoriAktif = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Detay = table.Column<string>(type: "TEXT", nullable: false),
+                    Creator = table.Column<int>(type: "INTEGER", nullable: true),
+                    Updater = table.Column<int>(type: "INTEGER", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UpdateDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kategori", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Musteri",
                 columns: table => new
                 {
@@ -107,6 +127,9 @@ namespace webapi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Firma");
+
+            migrationBuilder.DropTable(
+                name: "Kategori");
 
             migrationBuilder.DropTable(
                 name: "Musteri");
