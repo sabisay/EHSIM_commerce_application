@@ -132,8 +132,9 @@ namespace webapi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("KategoriAktif")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("KategoriAktif")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("TEXT");
@@ -224,6 +225,60 @@ namespace webapi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Musteri");
+                });
+
+            modelBuilder.Entity("webapi.Entity.Urun", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Birim")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Creator")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Updater")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UrunAdi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrunBirim")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrunDetay")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrunFiyat")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrunKDV")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrunKategorisi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Urun");
                 });
 #pragma warning restore 612, 618
         }

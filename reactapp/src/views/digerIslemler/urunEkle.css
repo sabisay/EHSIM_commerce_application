@@ -1,0 +1,14 @@
+.price-container {
+    display: flex;
+    align-items: center; /* Vertically align the elements */
+    gap: 10px; /* Space between the elements */
+    margin: 16px 0; /* Add margin for spacing */
+}
+
+.price-input {
+    width: 250px;
+}
+
+.custom-select {
+    width: 100px;
+}

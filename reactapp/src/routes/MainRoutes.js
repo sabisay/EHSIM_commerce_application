@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+import Lazy from 'yup/lib/Lazy';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -14,6 +15,8 @@ const Firmalar = Loadable(lazy(() => import('views/digerIslemler/FirmaListesi'))
 const FirmaEkle = Loadable(lazy(() => import('views/digerIslemler/FirmaEkle')));
 const Kategoriler = Loadable(lazy(() => import('views/digerIslemler/KategoriListesi')));
 const KategoriEkle = Loadable(lazy(() => import('views/digerIslemler/KategoriEkle')));
+const Urunler = Loadable(lazy(() => import('views/digerIslemler/UrunListesi')));
+const UrunEkle = Loadable(lazy(() => import('views/digerIslemler/UrunEkle')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -136,6 +139,18 @@ const MainRoutes = {
                 {
                     path: 'kategori-duzenle/:id',
                     element: <KategoriEkle />
+                },
+                {
+                    path: 'urunler',
+                    element: <Urunler />
+                },
+                {
+                    path: 'urun-ekle',
+                    element: <UrunEkle />
+                },
+                {
+                    path: 'urun-duzenle/:id',
+                    element: <UrunEkle />
                 }
             ]
         }

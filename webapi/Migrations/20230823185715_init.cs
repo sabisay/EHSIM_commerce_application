@@ -80,7 +80,7 @@ namespace webapi.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     KategoriAdi = table.Column<string>(type: "TEXT", nullable: false),
-                    KategoriAktif = table.Column<bool>(type: "INTEGER", nullable: false),
+                    KategoriAktif = table.Column<string>(type: "TEXT", nullable: false),
                     Detay = table.Column<string>(type: "TEXT", nullable: false),
                     Creator = table.Column<int>(type: "INTEGER", nullable: true),
                     Updater = table.Column<int>(type: "INTEGER", nullable: true),
@@ -114,6 +114,30 @@ namespace webapi.Migrations
                 {
                     table.PrimaryKey("PK_Musteri", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Urun",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UrunFiyat = table.Column<string>(type: "TEXT", nullable: false),
+                    UrunAdi = table.Column<string>(type: "TEXT", nullable: false),
+                    UrunKategorisi = table.Column<string>(type: "TEXT", nullable: false),
+                    UrunDetay = table.Column<string>(type: "TEXT", nullable: false),
+                    UrunKDV = table.Column<string>(type: "TEXT", nullable: false),
+                    Birim = table.Column<string>(type: "TEXT", nullable: false),
+                    UrunBirim = table.Column<string>(type: "TEXT", nullable: false),
+                    Creator = table.Column<int>(type: "INTEGER", nullable: true),
+                    Updater = table.Column<int>(type: "INTEGER", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UpdateDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Urun", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -133,6 +157,9 @@ namespace webapi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Musteri");
+
+            migrationBuilder.DropTable(
+                name: "Urun");
         }
     }
 }

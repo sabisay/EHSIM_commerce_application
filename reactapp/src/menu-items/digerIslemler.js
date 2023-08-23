@@ -1,8 +1,8 @@
 // assets
-import { IconUsers, IconBuildingEstate, IconCategory2 } from '@tabler/icons';
+import { IconUsers, IconBuildingEstate, IconCategory2, IconFolder } from '@tabler/icons';
 
 // constant
-const icons = { IconUsers, IconBuildingEstate, IconCategory2 };
+const icons = { IconUsers, IconBuildingEstate, IconCategory2, IconFolder };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -71,6 +71,27 @@ const digerIslemler = {
                     title: 'Kategori Ekle',
                     type: 'item',
                     url: '/digerIslemler/kategori-ekle'
+                }
+            ]
+        },
+        {
+            id: 'urunler',
+            title: 'Ürünler',
+            type: 'collapse',
+            icon: icons.IconFolder,
+
+            children: [
+                {
+                    id: 'urunler',
+                    title: 'Ürün Listesi',
+                    type: 'item',
+                    url: '/digerIslemler/urunler'
+                },
+                {
+                    id: 'urun-ekle',
+                    title: 'Ürün Ekle',
+                    type: 'item',
+                    url: '/digerIslemler/urun-ekle'
                 }
             ]
         }

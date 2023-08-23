@@ -7,6 +7,7 @@ using webapi.ViewModel.General.Grid;
 using webapi.ViewModel;
 using webapi.ViewModel.Musteri;
 using webapi.ViewModel.Kategori;
+using webapi.ViewModel.Firma;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -99,6 +100,20 @@ namespace webapi.Controllers
                 Detay = kategori.Detay
             };
             return new ApiResult<KategoriGridVM> { Data = kategoriVM, Result = true };
+        }
+
+        [HttpPost("getKategoriSelect")]
+        public ApiResult<List<KategoriGridVM>> GetKategoriSelect()
+        {
+            var kategori = _unitOfWork.Repository<Kategori>()
+                .Select(x => new KategoriGridVM
+                {
+                    Id = x.Id,
+                    KategoriAdi = x.KategoriAdi
+
+                }).ToList();
+
+            return new ApiResult<List<KategoriGridVM>> { Data = kategori, Result = true };
         }
 
     }
