@@ -127,7 +127,7 @@ namespace webapi.Migrations
                     UrunDetay = table.Column<string>(type: "TEXT", nullable: false),
                     UrunKDV = table.Column<string>(type: "TEXT", nullable: false),
                     Birim = table.Column<string>(type: "TEXT", nullable: false),
-                    UrunBirim = table.Column<string>(type: "TEXT", nullable: false),
+                    BirimliFiyat = table.Column<string>(type: "TEXT", nullable: false),
                     Creator = table.Column<int>(type: "INTEGER", nullable: true),
                     Updater = table.Column<int>(type: "INTEGER", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),

@@ -34,6 +34,7 @@ namespace webapi.Controllers
 				data.UrunDetay = dataVM.UrunDetay;
 				data.UrunKDV = dataVM.UrunKDV;
 				data.Birim = dataVM.Birim;
+				data.BirimliFiyat = dataVM.BirimliFiyat;
 			}
 			else
 			{
@@ -44,7 +45,8 @@ namespace webapi.Controllers
 					UrunKategorisi = dataVM.UrunKategorisi,
 					UrunDetay = dataVM.UrunDetay,
 					UrunKDV = dataVM.UrunKDV,
-					Birim= dataVM.Birim
+					Birim= dataVM.Birim,
+					BirimliFiyat = dataVM.BirimliFiyat
 				};
 				if (_unitOfWork.Repository<Urun>().Any(x => x == data))
 				{
@@ -89,6 +91,7 @@ namespace webapi.Controllers
 				UrunDetay = x.UrunDetay,
 				UrunKDV = x.UrunKDV,
 				Birim = x.Birim,
+				BirimliFiyat = x.BirimliFiyat
 			});
 			var rest = query.ToDataListRequest(Request.ToRequestFilter());
 
@@ -108,6 +111,7 @@ namespace webapi.Controllers
 				UrunDetay = urun.UrunDetay,
 				UrunKDV =urun.UrunKDV,
 				Birim = urun.Birim,
+				BirimliFiyat = urun.BirimliFiyat
 			};
 			return new ApiResult<UrunGridVM> { Data = urunVM, Result = true };
 		}

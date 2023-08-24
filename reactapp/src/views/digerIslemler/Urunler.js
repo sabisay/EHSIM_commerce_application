@@ -81,7 +81,7 @@ const Example = () => {
                 header: 'Kategori'
             },
             {
-                accessorKey: 'urunBirim',
+                accessorKey: 'birimliFiyat',
                 header: 'Fiyat '
             },
             {

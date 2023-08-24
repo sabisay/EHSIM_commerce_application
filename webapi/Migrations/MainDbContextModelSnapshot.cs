@@ -237,6 +237,10 @@ namespace webapi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("BirimliFiyat")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("CreationDate")
                         .HasColumnType("TEXT");
 
@@ -253,10 +257,6 @@ namespace webapi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UrunAdi")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UrunBirim")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

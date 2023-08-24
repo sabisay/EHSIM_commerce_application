@@ -26,8 +26,8 @@ function UrunEkle() {
     const [birim, setBirim] = React.useState('');
     const [validationErr, setValidationErr] = useState({});
     const [kategoriSelect, setKategoriSelect] = useState([]);
-    const [urunBirim, setUrunBirim] = useState('');
-    const lastFiyat = [];
+    const [birimliFiyat, setBirimliFiyat] = useState('');
+
     const options = [
         { value: 'tl', label: ' ₺ TL' },
         { value: 'euro', label: '€ Euro' },
@@ -155,7 +155,7 @@ function UrunEkle() {
                 urunFiyat: urunFiyat,
                 urunKDV: urunKDV,
                 birim: birim,
-                urunBirim: urunBirim
+                birimliFiyat: urunFiyat + birim
             });
 
             let config = {
@@ -224,7 +224,8 @@ function UrunEkle() {
                         setUrunFiyat(response.data.data.urunFiyat);
                         setUrunKDV(response.data.data.urunKDV);
                         setBirim(response.data.data.birim);
-                        setUrunBirim(response.data.data.urunFiyat + response.data.data.birim);
+                        setBirimliFiyat(response.data.data.birimliFiyat);
+                        console.log(birimliFiyat);
 
                         setFetchingError(false);
                         resolve(response.data); // Başarılı sonuç d1urumunda Promise'ı çöz
