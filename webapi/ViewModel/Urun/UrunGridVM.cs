@@ -10,5 +10,6 @@ namespace webapi.ViewModel.Urun
         public string UrunKDV { get; set; }
         public string Birim { get; set; }
         public string BirimliFiyat { get; set; }
+        public string UrunStok { get; set; }
     }
 }

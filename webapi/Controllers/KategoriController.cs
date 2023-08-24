@@ -109,7 +109,8 @@ namespace webapi.Controllers
                 .Select(x => new KategoriGridVM
                 {
                     Id = x.Id,
-                    KategoriAdi = x.KategoriAdi
+                    KategoriAdi = x.KategoriAdi,
+                    KategoriAktif  = x.KategoriAktif
 
                 }).ToList();
 

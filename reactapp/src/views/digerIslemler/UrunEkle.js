@@ -13,6 +13,7 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 function UrunEkle() {
     const { id } = useParams();
+    const { kategoriAktif } = useParams();
 
     const [fetchingError, setFetchingError] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
@@ -27,6 +28,7 @@ function UrunEkle() {
     const [validationErr, setValidationErr] = useState({});
     const [kategoriSelect, setKategoriSelect] = useState([]);
     const [birimliFiyat, setBirimliFiyat] = useState('');
+    const [urunStok, setUrunStok] = useState('');
 
     const options = [
         { value: 'tl', label: ' ₺ TL' },
@@ -39,6 +41,11 @@ function UrunEkle() {
         optionsKDV.push({ value: '%' + kdv.toString(), label: `${kdv}%` });
     }
 
+    const optionsStok = [];
+    for (let less = 5; less <= 1000; less = less + 5) {
+        optionsStok.push({ value: less.toString(), label: less });
+    }
+
     const handleChange = (selectedOption) => {
         setBirim(selectedOption.value);
     };
@@ -47,6 +54,9 @@ function UrunEkle() {
     };
     const handleChangeKategori = (selectedOption) => {
         setUrunKategorisi(selectedOption.value);
+    };
+    const handleChangeStok = (selectedOption) => {
+        setUrunStok(selectedOption.value);
     };
 
     const selectStylesKDV = {
@@ -124,24 +134,27 @@ function UrunEkle() {
             setUrunFiyat('');
             setUrunKDV('');
             setBirim('');
+            setUrunStok('');
         }
     }, [id]);
 
-    const urunEkle = () => {
+    const urunEkle = async () => {
         if (typeof id !== 'undefined') {
-            toast.promise(UrunEklePromise, {
-                pending: 'Urun güncelleniyor',
+            toast.promise(UrunEklePromise(), {
+                pending: 'Ürün güncelleniyor',
                 success: urunAdi + ' ' + urunKategorisi + ' başarıyla güncellendi 👌',
                 error: urunAdi + ' ' + urunKategorisi + ' güncellenirken hata oluştu 🤯'
             });
         } else {
-            toast.promise(UrunEklePromise, {
+            toast.promise(UrunEklePromise(), {
                 pending: 'Ürün kaydı yapılıyor',
                 success: urunAdi + ' ' + urunKategorisi + ' başarıyla eklendi 👌',
                 error: urunAdi + ' ' + urunKategorisi + ' eklenirken hata oluştu 🤯'
             });
         }
     };
+
+    // ... (existing JSX and rendering logic)
 
     const UrunEklePromise = () => {
         return new Promise(async (resolve, reject) => {
@@ -155,7 +168,8 @@ function UrunEkle() {
                 urunFiyat: urunFiyat,
                 urunKDV: urunKDV,
                 birim: birim,
-                birimliFiyat: urunFiyat + birim
+                birimliFiyat: urunFiyat + ' ' + birim,
+                urunStok: urunStok
             });
 
             let config = {
@@ -225,6 +239,7 @@ function UrunEkle() {
                         setUrunKDV(response.data.data.urunKDV);
                         setBirim(response.data.data.birim);
                         setBirimliFiyat(response.data.data.birimliFiyat);
+                        setUrunStok(response.data.data.urunStok);
                         console.log(birimliFiyat);
 
                         setFetchingError(false);
@@ -258,7 +273,8 @@ function UrunEkle() {
                     Accept: 'text/plain'
                 },
                 params: {
-                    id: id
+                    id: id,
+                    kategoriAktif: kategoriAktif
                 }
             };
 
@@ -266,7 +282,8 @@ function UrunEkle() {
                 .request(config)
                 .then(async (response) => {
                     console.log(JSON.stringify(response.data.data));
-                    setKategoriSelect(response.data.data);
+                    const filteredCategories = response.data.data.filter((item) => item.kategoriAktif === 'aktif');
+                    setKategoriSelect(filteredCategories);
                     setFetchingError(false);
                     resolve(response.data);
                     if (response.data.result) {
@@ -331,6 +348,7 @@ function UrunEkle() {
                                     />
                                     <Select
                                         className="custom-select"
+                                        value={birim !== '' ? { value: birim, label: birim } : null}
                                         styles={selectStyles}
                                         variant="outlined"
                                         id="birim"
@@ -341,6 +359,7 @@ function UrunEkle() {
                                 </div>
                                 <Select
                                     className="custom-select"
+                                    value={urunKDV !== '' ? { value: urunKDV, label: urunKDV } : null}
                                     variant="outlined"
                                     styles={selectStylesKDV}
                                     id="KDV"
@@ -351,6 +370,7 @@ function UrunEkle() {
                                 <div style={{ marginTop: '20px' }}>
                                     <Select
                                         className="custom-select"
+                                        value={urunKategorisi !== '' ? { value: urunKategorisi, label: urunKategorisi } : null}
                                         styles={selectStylesKDV}
                                         variant="outlined"
                                         id="category"
@@ -361,7 +381,21 @@ function UrunEkle() {
                                             label: kategoriItem.kategoriAdi
                                         }))}
                                     />
+                                    <div style={{ marginTop: '20px' }}>
+                                        <Select
+                                            className="custom-select"
+                                            value={urunStok !== '' ? { value: urunStok, label: urunStok } : null}
+                                            styles={selectStylesKDV}
+                                            variant="outlined"
+                                            id="category"
+                                            onChange={handleChangeStok}
+                                            placeholder="Stok Adedi"
+                                            options={optionsStok}
+                                        />
+                                    </div>
                                 </div>
+                                <div style={{ marginTop: '20px' }}>Ürün Resmi (Opsiyonel)</div>
+                                <div style={{ marginTop: '20px' }} />
                                 <div style={{ marginTop: '20px' }} /> {}
                                 <Button onClick={urunEkle} className="mb-2" margin="normal" variant="contained">
                                     Kaydet
