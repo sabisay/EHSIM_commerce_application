@@ -10,5 +10,6 @@ namespace webapi.Entity
         public string Birim { get; set; }
         public string BirimliFiyat { get; set; }
         public string UrunStok { get; set; }
+        public string UrunResmi {  get; set; }
     }
 }

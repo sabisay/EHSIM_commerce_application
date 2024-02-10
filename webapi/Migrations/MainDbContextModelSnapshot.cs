@@ -276,6 +276,10 @@ namespace webapi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("UrunResmi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UrunStok")
                         .IsRequired()
                         .HasColumnType("TEXT");

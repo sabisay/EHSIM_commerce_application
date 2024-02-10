@@ -29,6 +29,7 @@ function UrunEkle() {
     const [kategoriSelect, setKategoriSelect] = useState([]);
     const [birimliFiyat, setBirimliFiyat] = useState('');
     const [urunStok, setUrunStok] = useState('');
+    const [urunResmi, setUrunResmi] = useState('');
 
     const options = [
         { value: 'tl', label: ' ₺ TL' },
@@ -57,6 +58,9 @@ function UrunEkle() {
     };
     const handleChangeStok = (selectedOption) => {
         setUrunStok(selectedOption.value);
+    };
+    const handleChangeFile = (event) => {
+        const file = event.target.files[0];
     };
 
     const selectStylesKDV = {
@@ -135,6 +139,7 @@ function UrunEkle() {
             setUrunKDV('');
             setBirim('');
             setUrunStok('');
+            setUrunResmi('');
         }
     }, [id]);
 
@@ -169,7 +174,8 @@ function UrunEkle() {
                 urunKDV: urunKDV,
                 birim: birim,
                 birimliFiyat: urunFiyat + ' ' + birim,
-                urunStok: urunStok
+                urunStok: urunStok,
+                urunResmi: urunResmi
             });
 
             let config = {
@@ -240,6 +246,7 @@ function UrunEkle() {
                         setBirim(response.data.data.birim);
                         setBirimliFiyat(response.data.data.birimliFiyat);
                         setUrunStok(response.data.data.urunStok);
+                        setUrunResmi(response.data.data.urunResmi);
                         console.log(birimliFiyat);
 
                         setFetchingError(false);
@@ -395,8 +402,10 @@ function UrunEkle() {
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '20px' }}>Ürün Resmi (Opsiyonel)</div>
-                                <div style={{ marginTop: '20px' }} />
-                                <div style={{ marginTop: '20px' }} /> {}
+                                <div style={{ marginTop: '20px' }}>
+                                    <input type="file" accept="image/*" onChange={handleChangeFile} />
+                                </div>
+                                <div style={{ marginTop: '20px' }}>{urunResmi && <img src={urunResmi} alt="Ürün Resmi" />}</div>
                                 <Button onClick={urunEkle} className="mb-2" margin="normal" variant="contained">
                                     Kaydet
                                 </Button>

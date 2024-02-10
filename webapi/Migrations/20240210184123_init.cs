@@ -129,6 +129,7 @@ namespace webapi.Migrations
                     Birim = table.Column<string>(type: "TEXT", nullable: false),
                     BirimliFiyat = table.Column<string>(type: "TEXT", nullable: false),
                     UrunStok = table.Column<string>(type: "TEXT", nullable: false),
+                    UrunResmi = table.Column<string>(type: "TEXT", nullable: false),
                     Creator = table.Column<int>(type: "INTEGER", nullable: true),
                     Updater = table.Column<int>(type: "INTEGER", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),

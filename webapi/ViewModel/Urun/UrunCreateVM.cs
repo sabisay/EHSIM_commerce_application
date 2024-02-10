@@ -21,6 +21,7 @@ namespace webapi.ViewModel.Urun
         public string BirimliFiyat { get; set;}
         [Required]
         public string UrunStok { get; set; }
+        public string UrunResmi {  get; set; }
 
     }
 }

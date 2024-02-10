@@ -11,7 +11,7 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20230824135203_init")]
+    [Migration("20240210184123_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -276,6 +276,10 @@ namespace webapi.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UrunKategorisi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrunResmi")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
