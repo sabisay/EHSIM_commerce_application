@@ -30,6 +30,7 @@ function UrunEkle() {
     const [birimliFiyat, setBirimliFiyat] = useState('');
     const [urunStok, setUrunStok] = useState('');
     const [urunResmi, setUrunResmi] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const options = [
         { value: 'tl', label: ' ₺ TL' },
@@ -60,7 +61,24 @@ function UrunEkle() {
         setUrunStok(selectedOption.value);
     };
     const handleChangeFile = (event) => {
-        const file = event.target.files[0];
+        setSelectedFile(event.target.files[0]);
+    };
+    const handleUpload = () => {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        axios
+            .post('http://localhost:5273/api/Urun/UploadImage', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     const selectStylesKDV = {
@@ -144,6 +162,7 @@ function UrunEkle() {
     }, [id]);
 
     const urunEkle = async () => {
+        handleUpload();
         if (typeof id !== 'undefined') {
             toast.promise(UrunEklePromise(), {
                 pending: 'Ürün güncelleniyor',

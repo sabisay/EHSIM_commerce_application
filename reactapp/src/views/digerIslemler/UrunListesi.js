@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { IconInfoCircle } from '@tabler/icons';
 import React from 'react';
-import { height } from '@mui/system';
 
 const Example = () => {
     const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
@@ -24,7 +23,7 @@ const Example = () => {
         pageSize: 10
     });
 
-    const BlocknoteModal = ({ open, onClose, urunAdi, urunDetay, fiyatGecmisi }) => {
+    const BlocknoteModal = ({ open, onClose, urunAdi }) => {
         return (
             <Modal open={open} onClose={onClose}>
                 <Box
@@ -47,7 +46,7 @@ const Example = () => {
                     <Typography variant="h1" gutterBottom>
                         {urunAdi}
                     </Typography>
-                    <Typography variant="body1">{urunDetay + '\n' + 'Ürün Geçmiş Fiyatları: ' + '\n' + fiyatGecmisi}</Typography>
+                    <img id="uploadedImage" src="https://localhost:7002/api/Urun/UploadImage/KawaiiDressUp.png" alt="Uploaded"></img>
                     <Button onClick={onClose}>Kapat</Button>
                 </Box>
             </Modal>
@@ -176,13 +175,13 @@ const Example = () => {
                 }}
                 renderRowActions={({ row }) => (
                     <div>
-                        <BlocknoteModal
-                            open={modalOpen}
-                            onClose={handleCloseModal}
-                            urunAdi={row.original.urunAdi}
-                            urunDetay={row.original.urunDetay}
-                            fiyatGecmisi={row.original.fiyatGecmisi}
-                        />
+                        <BlocknoteModal open={modalOpen} onClose={handleCloseModal} urunAdi={row.original.urunAdi}>
+                            <img
+                                id="uploadedImage"
+                                src="https://localhost:7002/api/Urun/UploadImage/KawaiiDressUp.png"
+                                alt="Uploaded"
+                            ></img>
+                        </BlocknoteModal>
                         <Box
                             sx={{
                                 display: 'flex',

@@ -123,7 +123,28 @@ namespace webapi.Controllers
 			return new ApiResult<UrunGridVM> { Data = urunVM, Result = true };
 		}
 
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("File not selected");
+            }
 
+            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
 
+            var filePath = Path.Combine(directoryPath, file.FileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return Ok("File uploaded successfully");
+        }
     }
 }
